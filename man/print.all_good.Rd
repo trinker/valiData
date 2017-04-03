@@ -14,4 +14,3 @@
 \description{
 Prints a all_good object
 }
-

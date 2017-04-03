@@ -18,4 +18,3 @@ ll <- import("~/Desktop/Dictionary.xlsx")
 ll <- mapper(ll)
 }
 }
-

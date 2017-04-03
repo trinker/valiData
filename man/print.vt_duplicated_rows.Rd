@@ -14,4 +14,3 @@
 \description{
 Prints a vt_duplicated_rows object
 }
-

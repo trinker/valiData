@@ -25,4 +25,3 @@ dat <- data.frame(
 vc_zipcode(dat, 'zip1')
 vc_zipcode(dat, 'zip2')
 }
-

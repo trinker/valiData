@@ -15,4 +15,3 @@ vc_column_apply(data, colmap)
 Apply a column map from \code{read_column_map_dir} to a
 \code{\link[base]{data.frame}}.
 }
-

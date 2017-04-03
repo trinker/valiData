@@ -21,4 +21,3 @@ Returns a list of validation results.
 \code{vt_column_order} - Validates that a .csv file's
 \code{\link[base]{data.frame}} columns are ordered as expected.
 }
-

@@ -14,4 +14,3 @@
 \description{
 Prints a vt_column_order object
 }
-

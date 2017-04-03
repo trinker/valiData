@@ -29,4 +29,3 @@ dat <- data.frame(x = sample(c("NULL", rep(LETTERS[1:10])), 10000, TRUE))
 vc_null(dat, 'x')
 vc_null(dat, 'x', prop.acceptable = .1)
 }
-

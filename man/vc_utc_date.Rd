@@ -26,4 +26,3 @@ dat <- data.frame(
 vc_utc_date(dat, 'start')
 vc_utc_date(dat, 'end')
 }
-

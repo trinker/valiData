@@ -23,4 +23,3 @@ cat(
 )
 vf_csv_broken(loc)
 }
-

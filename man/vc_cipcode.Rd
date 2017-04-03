@@ -26,4 +26,3 @@ dat <- data.frame(
 )
 vc_cipcode(dat, 'cips')
 }
-

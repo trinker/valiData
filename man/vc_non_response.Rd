@@ -26,4 +26,3 @@ set.seed(10)
 x <- sample(c(NA, rep(LETTERS[1:10], 100)), 10000, TRUE)
 vc_non_response(x)
 }
-

@@ -25,4 +25,3 @@ Validates If Correct Categories Used
 vc_categories(mtcars, 'cyl', c(6, 8))
 str(vc_categories(mtcars, 'cyl', c(6, 8)))
 }
-

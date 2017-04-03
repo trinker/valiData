@@ -26,4 +26,3 @@ dat <- data.frame(
 vc_regex(dat, 'vals', '^[A-Z][^0-9]+$')
 vc_regex(dat, 'vals', '^[A-Z].+$')
 }
-

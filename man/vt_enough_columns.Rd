@@ -21,4 +21,3 @@ Returns a list of validation results.
 \code{vt_enough_columns} - Validates that a .csv file's
 \code{\link[base]{data.frame}} has n columns.
 }
-

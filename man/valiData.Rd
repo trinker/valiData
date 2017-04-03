@@ -22,4 +22,3 @@ Validate a directory of dubdirectories of .csv files.
 \seealso{
 \code{\link[valiData]{validate_file}}
 }
-

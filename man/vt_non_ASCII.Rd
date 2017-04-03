@@ -30,4 +30,3 @@ dat <- data.frame(
 vt_non_ASCII(dat)
 str(vt_non_ASCII(dat))
 }
-

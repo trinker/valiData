@@ -34,4 +34,3 @@ vc_(mtcars, 'drat', 'drat >= wt',
     augment_comment = " because `drat` is less than `wt`")
 str(vc_(mtcars, 'mpg', 'abs(scale(mpg)) < 2'))
 }
-

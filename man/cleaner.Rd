@@ -18,4 +18,3 @@ ll <- read_csv("~/Desktop/file.csv")
 ll <- cleaner(ll)
 }
 }
-

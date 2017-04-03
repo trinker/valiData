@@ -26,4 +26,3 @@ dat <- data.frame(
 vc_nchar(dat, 'x', 3)
 vc_nchar(dat, 'x', 10)
 }
-

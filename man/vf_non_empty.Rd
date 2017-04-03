@@ -20,4 +20,3 @@ writeLines("", '~/filename.csv')
 writeLines("hi", '~/filename.csv')
 		vf_non_empty('~/filename.csv') 	#  TRUE
 }
-

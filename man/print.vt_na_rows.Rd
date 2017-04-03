@@ -14,4 +14,3 @@
 \description{
 Prints a vt_na_rows object
 }
-

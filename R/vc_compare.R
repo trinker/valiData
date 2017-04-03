@@ -36,6 +36,15 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     is_na <- c(is.na(colx))|c(is.na(coly))
 
     if (isTRUE(date)) {
+        ## enable mm/dd/yyyy format
+        slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', colx)
+        zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', colx[slasher_locs], perl=TRUE)
+        colx[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\1', zero_added, perl = TRUE)
+
+        slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', coly)
+        zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', coly[slasher_locs], perl=TRUE)
+        coly[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\1', zero_added, perl = TRUE)
+
         colx[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
         coly[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
     }

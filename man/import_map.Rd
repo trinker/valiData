@@ -21,4 +21,3 @@ Convenience Function to Imports and Map Dictionary: wraps up import() and mapper
 ll <- import_map("~/Desktop/Dictionary.xlsx")
 }
 }
-

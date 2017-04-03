@@ -33,4 +33,3 @@ df <- mtcars; colnames(df) <- mtcars[1, ]
 vt_header(df, map)
 str(vt_header(df, map))
 }
-

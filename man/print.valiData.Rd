@@ -20,4 +20,3 @@ instances of `report will be deleted.}
 \description{
 Prints a valiData object
 }
-

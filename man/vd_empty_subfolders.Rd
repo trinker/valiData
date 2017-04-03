@@ -31,4 +31,3 @@ dir(dir_name, recursive=TRUE, include.dirs =  TRUE, full.names = TRUE)
 dir(dir_name, include.dirs =  TRUE, full.names = TRUE)
 vd_empty_subfolders(dir(dir_name, include.dirs =  TRUE, full.names = TRUE))
 }
-

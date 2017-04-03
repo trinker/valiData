@@ -23,4 +23,3 @@ required columns containing values.
 \description{
 Validate a .csv file.
 }
-

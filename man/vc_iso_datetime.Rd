@@ -26,4 +26,3 @@ dat <- data.frame(
 vc_iso_datetime(dat, 'start')
 vc_iso_datetime(dat, 'end')
 }
-

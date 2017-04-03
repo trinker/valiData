@@ -10,7 +10,7 @@ vc_column_apply <- function(data, colmap){
     ## only check the headers that exist in both map and data
     map <- colmap[colnames(data)[colnames(data) %in% names(colmap)]]
     data <- data[names(map)]
-
+# browser()
     Map(function(x, y, z){
         #y <-
         #gsub("\\)$", paste0("data, ", z, "\")"), y)

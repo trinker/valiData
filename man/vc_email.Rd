@@ -24,4 +24,3 @@ dat <- data.frame(
 )
 vc_email(dat, 'email')
 }
-

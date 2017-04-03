@@ -12,4 +12,3 @@ Generate random praise from a cow.
 \examples{
 report_all_is_well()
 }
-

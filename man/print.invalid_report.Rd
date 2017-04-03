@@ -14,4 +14,3 @@
 \description{
 Prints a invalid_report object
 }
-

@@ -1,5 +1,6 @@
 ## This file is for internal use
-compare_column <- function(path, column, parent, child, ignore.case = TRUE, ...) {
+compare_column <- function(path, parent.column, child.column = parent.column,
+    parent, child, ignore.case = TRUE, ...) {
 
     . <- NULL
 
@@ -36,13 +37,13 @@ compare_column <- function(path, column, parent, child, ignore.case = TRUE, ...)
     }
 
     ## check for duplicate rows minus the personal identifier
-    dupes <- vt_duplicated_rows(parent_table[, !parent_table %in% c(column)])
+    dupes <- vt_duplicated_rows(parent_table[, !parent_table %in% c(parent.column)])
     if (!dupes[['valid']]) {return(dupes)}
 
     validated <- lapply(stats::na.omit(child_file), function(x){
         child_table <- suppressWarnings(readr::read_csv(x))
         if (isTRUE(ignore.case)){colnames(child_table) <- tolower(colnames(child_table))}
-        vc_id_found(child_table, column, parent_table, ignore.case=ignore.case, parent=parent)
+        vc_id_found(data=child_table, x=parent.column, y=child.column, data2 = parent_table, ignore.case=ignore.case, parent=parent)
     })
 
 
@@ -66,13 +67,15 @@ compare_column <- function(path, column, parent, child, ignore.case = TRUE, ...)
 }
 
 
-vc_id_found <- function(data, x, data2, ignore.case, parent = 'the parent data', ...) {
-
-    col <- sub_out_missing(data[[x]])
-    is_na <- is.na(col)
+vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', ...) {
 
     xc <- ifelse(ignore.case, tolower(x), x)
-    is_valid <- data[[xc]] %in% data2[[xc]]
+    yc <- ifelse(ignore.case, tolower(x), x)
+
+    col <- sub_out_missing(data[[yc]])
+    is_na <- is.na(col)
+
+    is_valid <- data[[yc]] %in% data2[[xc]]
 
     is_valid[is_na] <- NA
     are_valid <- all(is_valid)
@@ -84,10 +87,11 @@ vc_id_found <- function(data, x, data2, ignore.case, parent = 'the parent data',
     }
 
     vc_output <- list(column_name = x, valid = are_valid, message = message,
-        passing = is_valid, missing = is_na, call = "vc_id_found")
+        passing = is_valid, missing = is_na, call = "vc_id_found", column_name.y = y)
     class(vc_output) <- "vc"
     vc_output
 }
+
 
 
 print.compare_column <- function(x, ...){

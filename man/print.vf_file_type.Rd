@@ -14,4 +14,3 @@
 \description{
 Prints a vf_file_type object
 }
-

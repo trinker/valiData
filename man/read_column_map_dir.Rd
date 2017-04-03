@@ -18,4 +18,3 @@ Returns a list of named column tests to be run in \code{valiData}.
 \description{
 Read in Debian Control file column mapping.
 }
-

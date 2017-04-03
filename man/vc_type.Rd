@@ -19,4 +19,3 @@ guid,enumerated are handled outside by \code{vc_unique} and \code{vc_categories}
 \description{
 Switch Method Based On Type Of Data in Column
 }
-

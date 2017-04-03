@@ -23,9 +23,9 @@ vf_csv_broken <- function(path, ...){
     ## not parse differently from comma broken csv files.  readr now handles
     ## these types of csv file appropriately.
 
-	offender_rows <- NULL
-	cols  <- NULL
-	proportion <- NULL
+    offender_rows <- NULL
+    cols  <- NULL
+    proportion <- NULL
 
     data <- suppressWarnings(readr::read_csv(path))
 
@@ -57,16 +57,23 @@ vf_csv_broken <- function(path, ...){
     ## First if/else is looking for (based on assumptions stated above):
     ##  1. readr `problems` function output problems w/ an 'expected' column
     ##  2. Does the 'expected' column contain the pattern "# columns"
+
+    ## Check what elements of 'expected' column have "# columns" form
+    if (!is.null(problem_cases[["expected"]])){
+        expected_cols <- ncol(data)
+        offending_problems <- grepl("^\\d+\\s*columns$", problem_cases[["actual"]])
+        offending_problems <- offending_problems & as.numeric(gsub("(^\\d+)(\\s*columns$)", "\\1", problem_cases[["actual"]][offending_problems])) > expected_cols
+    }
+
     if (
             ## the readr problems has an 'expected' column
             !is.null(problem_cases[["expected"]]) &&
 
             ## the readr problems's expected column contains the word column
-            any(grepl("^\\d+\\s*columns$", problem_cases[["expected"]]))
+            any(offending_problems)
         ) {
 
-            ## Check what elements of 'expected' column have "# columns" form
-            offending_problems <- grepl("^\\d+\\s*columns$", problem_cases[["expected"]])
+
             ## Extract offending rows (index the grep from offending problems on the
             ## 'row' column from `problems` output)
             offender_rows <- problem_cases[["row"]][offending_problems]
@@ -146,8 +153,4 @@ print.vf_csv_broken <- function (x, ...)	{
 		cat(x[['message']])
 	}
 }
-
-
-
-
 

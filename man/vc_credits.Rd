@@ -23,4 +23,3 @@ dat <- data.frame(
 )
 vc_credits(dat, 'credits')
 }
-

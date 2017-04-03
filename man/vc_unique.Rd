@@ -24,4 +24,3 @@ dat <- data.frame(
 vc_unique(dat, 'id')
 vc_unique(dat, 'guid')
 }
-

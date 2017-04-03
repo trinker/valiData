@@ -22,4 +22,3 @@ test2 <- rbind(mtcars, stats::setNames( test, names(mtcars) ))
 vt_na_rows(test2)
 str(vt_na_rows(test2))
 }
-

@@ -27,4 +27,3 @@ Returns a list of validation results.
 \code{\link[base]{data.frame}} contains no missing/null values in required
 fields.
 }
-

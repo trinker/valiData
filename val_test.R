@@ -1,6 +1,6 @@
-pacman::p_install_gh("data-steve/valiData")
+pacman::p_install_gh("trinker/valiData")
 
-clDev::source_R_folder("~/Documents/repos/github_packages/valiData/R/")
+clDev::source_R_folder()
 # clDev::source_R_folder()
 
 wkd <- cl::l_drive_go("fdu")
@@ -17,7 +17,7 @@ core_data_map <- readRDS(map_loc)
 
 
 valiData::
-    valiData(path=wkd, core_data_map=core_data_map, column_map=col_map, delete = TRUE)
+    valiData(path=wkd, )
 
 validate_file(file, core_data_map=core_data_map, column_map=col_map)
 

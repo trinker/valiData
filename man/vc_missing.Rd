@@ -29,4 +29,3 @@ dat <- data.frame(x = sample(c(NA, rep(LETTERS[1:10])), 10000, TRUE))
 vc_missing(dat, 'x')
 vc_missing(dat, 'x', prop.acceptable = .1)
 }
-

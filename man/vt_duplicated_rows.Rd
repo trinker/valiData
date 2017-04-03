@@ -23,4 +23,3 @@ vt_duplicated_rows(CO2)
 vt_duplicated_rows(CO2[, 1:3])
 str(vt_duplicated_rows(CO2[, 1:3]))
 }
-

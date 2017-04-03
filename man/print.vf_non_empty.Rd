@@ -14,4 +14,3 @@
 \description{
 Prints a vf_non_empty object
 }
-

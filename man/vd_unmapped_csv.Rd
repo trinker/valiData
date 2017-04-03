@@ -19,4 +19,3 @@ Returns a list of validation results.
 \description{
 Validate Folders that contain CSVs are found in map
 }
-

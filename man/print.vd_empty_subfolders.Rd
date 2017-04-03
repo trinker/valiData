@@ -14,4 +14,3 @@
 \description{
 Prints a vd_empty_subfolders object
 }
-

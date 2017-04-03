@@ -20,4 +20,3 @@ dir.create("~/totally_rad_man")
 writeLines("hi", '~/filename1.csv')
 	  vd_non_empty('~/filename1.csv') 	    #  TRUE
 }
-

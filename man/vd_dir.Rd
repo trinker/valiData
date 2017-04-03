@@ -18,4 +18,3 @@ Checks If Path Is Directory
 vd_dir(system.file())
 vd_dir(system.file("INDEX"))
 }
-

@@ -23,4 +23,3 @@ df <- mtcars; colnames(df)[c(1, 5)]  <- c("split header", "foo bar"); df
 vt_spaced_colnames(df)
 str(vt_spaced_colnames(df))
 }
-

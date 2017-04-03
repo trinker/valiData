@@ -19,4 +19,3 @@ vf_file_type("broken_csv.R")           #  FALSE
 vf_file_type("broken_csv.R", type="R") #  TRUE
 vf_file_type("hello.csv")              #  TRUE
 }
-

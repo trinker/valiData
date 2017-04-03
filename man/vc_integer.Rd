@@ -25,4 +25,3 @@ dat <- data.frame(
 vc_integer(dat, 'vals')
 vc_integer(dat, 'vals2')
 }
-

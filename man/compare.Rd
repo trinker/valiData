@@ -16,4 +16,3 @@ compare(xx, yy, fun)
 \description{
 Helper Function for vc_compare
 }
-

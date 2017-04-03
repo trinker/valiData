@@ -37,4 +37,3 @@ vc_compare(dat, x = 'a', y = 'b', '<=')
 vc_compare(dat, x = 'd1', y = 'd2', '<', date=TRUE)
 vc_compare(dat, x = 'd1', y = 'd2', '<=', date=TRUE)
 }
-

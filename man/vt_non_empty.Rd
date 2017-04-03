@@ -25,4 +25,3 @@ vt_non_empty(CO2)
 vt_non_empty(CO2[0, 1:3])
 str(vt_non_empty(CO2[0, 1:3]))
 }
-

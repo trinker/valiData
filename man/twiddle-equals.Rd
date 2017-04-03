@@ -14,4 +14,3 @@
 \description{
 Helper Function for vc_compare to implement all.equal as new comparison operator
 }
-

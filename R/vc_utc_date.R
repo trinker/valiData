@@ -23,6 +23,11 @@ vc_utc_date <- function(data, x, ...){
     ## record missing (NA)
     is_na <- is.na(col)
 
+    ## enable mm/dd/yyyy format
+    slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', col)
+    zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', col[slasher_locs], perl=TRUE)
+    col[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\1', zero_added, perl = TRUE)
+
     ## expression to validate against (elementwise)
     col[!is_na] <- parsedate::parse_iso_8601(trimws(col[!is_na]))
     is_valid <- !c(is.na(col) & !is_na)
