@@ -2,8 +2,6 @@
 # BUILD
 #========
 source("inst/build.R")  ## Tyler uses this
-devtools::document()
-
 
 #==========================
 # Run unit tests

@@ -75,15 +75,23 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
     col <- sub_out_missing(data[[yc]])
     is_na <- is.na(col)
 
-    is_valid <- data[[yc]] %in% data2[[xc]]
+    if (!all(is_na)) {
 
-    is_valid[is_na] <- NA
-    are_valid <- all(is_valid)
-    if (!are_valid) {
-        message <- sprintf("The following rows of %s contain elements not found in %s:\n\n%s\n\n\n\n",
-            sQuote(x), parent, output_truncate(which(!is_valid)))
+        is_valid <- data[[yc]] %in% data2[[xc]]
+
+        is_valid[is_na] <- NA
+        are_valid <- all(is_valid)
+
+        if (!are_valid) {
+            message <- sprintf("The following rows of %s contain elements not found in %s:\n\n%s\n\n\n\n",
+                sQuote(x), parent, output_truncate(which(!is_valid)))
+        } else {
+            message <- NULL
+        }
     } else {
         message <- NULL
+        are_valid <- TRUE
+        is_valid <- TRUE
     }
 
     vc_output <- list(column_name = x, valid = are_valid, message = message,
