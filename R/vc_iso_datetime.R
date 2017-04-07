@@ -26,7 +26,7 @@ vc_iso_datetime <- function(data, x, ...){
     ## enable mm/dd/yyyy format
     slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', col)
     zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', col[slasher_locs], perl=TRUE)
-    col[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\1', zero_added, perl = TRUE)
+    col[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
 
     ## expression to validate against (elementwise)
