@@ -34,6 +34,7 @@ validate_file <- function(path, file_name, map, ...){
         ##---------------##
 
         ## get data
+## read in all cols as character...this may have future implications when we expect numeric
         data <- suppressWarnings(readr::read_csv(path, col_types = readr::cols(.default = "c")))
         colnames(data) <- gsub("^[^ -~]", "", colnames(data))  # put in to remove the <U+FEFF> character read_csv puts in first column header 8/15/2016
 
