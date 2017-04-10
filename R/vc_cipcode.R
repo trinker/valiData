@@ -26,7 +26,7 @@ vc_cipcode <- function(data, x, ...){
     #    ##removed regex validation below to be specific 11/02/2016
     #    #cipregex <- "(^0$)(*SKIP)(*FAIL)|((^\\s*\\d{1,2}\\.??\\s*$)|(^\\s*\\d{1,2}\\.(\\d{2,4})\\s*$))"
     #    #is_valid <- grepl(cipregex, col, perl=TRUE)
-#browser()
+browser()
     is_valid <- col %in% valid_cips_all
     is_valid[is_na] <- NA
 
