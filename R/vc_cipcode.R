@@ -26,7 +26,7 @@ vc_cipcode <- function(data, x, ...){
     #    ##removed regex validation below to be specific 11/02/2016
     #    #cipregex <- "(^0$)(*SKIP)(*FAIL)|((^\\s*\\d{1,2}\\.??\\s*$)|(^\\s*\\d{1,2}\\.(\\d{2,4})\\s*$))"
     #    #is_valid <- grepl(cipregex, col, perl=TRUE)
-browser()
+# browser()
     is_valid <- col %in% valid_cips_all
     is_valid[is_na] <- NA
 
@@ -443,18 +443,21 @@ valid_cips <- c("1", "1.01", "1.0101", "1.0102", "1.0103", "1.0104", "1.0105",
 
 
 ##CIP must be 2, 4 or 6 digits (not including decimals)
-singles <- grep('^\\d{1,2}$', valid_cips, value=TRUE)
+singles <- stringi::stri_pad_left(grep('^\\d{1,2}$', valid_cips, value=TRUE), 2, pad = '0')
 singles_augmented <- unlist(lapply(c('', '.', '.00', '.0000'), function(x) paste0(singles, x)))
 
-doubles <- grep('^\\d{1,2}\\.\\d{2}$', valid_cips, value=TRUE)
+doubles <- grep('^\\d{1,2}\\.\\d{1,2}$', valid_cips, value=TRUE)
+doubles <- gsub("(^\\d)(\\.)", "0\\1.", doubles, perl = TRUE)
+doubles <- gsub("(\\.)(\\d$)", ".\\20", doubles, perl = TRUE)
+
 doubles_augmented <- unlist(lapply(c('', '00'), function(x) paste0(doubles, x)))
 
 
 triples <- grep('^\\d{1,2}\\.\\d{4}$', valid_cips, value=TRUE)
+triples <- gsub("(^\\d)(\\.)", "0\\1.", triples, perl = TRUE)
+triples <- gsub("(\\.)(\\d{3}$)", ".\\20", triples, perl = TRUE)
 
 
-valid_cips_all <- c(singles_augmented, doubles_augmented, triples)
-
-09.04 %in% valid_cips_all
+valid_cips_all <- sort(unique(c(singles_augmented, doubles_augmented, triples)))
 
 
