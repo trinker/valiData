@@ -28,6 +28,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     # if(missing(x)) (return())
     # if(missing(y)) (return())
 
+### may ventually need to specify col type her because > makes no sense on character cols
 
     ## select the column & replace missing with NA
     colx <- sub_out_missing(data[[x]])
@@ -48,9 +49,6 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 
         colx[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
         coly[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
-    } else {
-        colx <- as.numeric(colx)
-        coly <- as.numeric(coly)
     }
 
     if (all(!is_na & is.na(colx))|all(!is_na & is.na(coly))) {
