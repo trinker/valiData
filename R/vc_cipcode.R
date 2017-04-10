@@ -26,8 +26,8 @@ vc_cipcode <- function(data, x, ...){
     #    ##removed regex validation below to be specific 11/02/2016
     #    #cipregex <- "(^0$)(*SKIP)(*FAIL)|((^\\s*\\d{1,2}\\.??\\s*$)|(^\\s*\\d{1,2}\\.(\\d{2,4})\\s*$))"
     #    #is_valid <- grepl(cipregex, col, perl=TRUE)
-
-    is_valid <- col %in% valid_cips
+#browser()
+    is_valid <- col %in% valid_cips_all
     is_valid[is_na] <- NA
 
     ## valid columnwise: Are all elelemnts either valid or NA?
@@ -453,7 +453,8 @@ doubles_augmented <- unlist(lapply(c('', '00'), function(x) paste0(doubles, x)))
 triples <- grep('^\\d{1,2}\\.\\d{4}$', valid_cips, value=TRUE)
 
 
-valid_cips <- c(singles_augmented, doubles_augmented, triples)
+valid_cips_all <- c(singles_augmented, doubles_augmented, triples)
 
+09.04 %in% valid_cips_all
 
 
