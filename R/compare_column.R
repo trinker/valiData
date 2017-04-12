@@ -70,7 +70,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', ...) {
 
     xc <- ifelse(ignore.case, tolower(x), x)
-    yc <- ifelse(ignore.case, tolower(x), x)
+    yc <- ifelse(ignore.case, tolower(y), y)
 
     col <- sub_out_missing(data[[yc]])
     is_na <- is.na(col)
