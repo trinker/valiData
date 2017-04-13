@@ -29,10 +29,9 @@ mapper_table_files <- function(tfdct){
 mapper_required_columns <- function(d){
     dd <- split(d, d[["file"]])
     lapply(dd, function(x){
-        x[tolower(x$required)=="yes", "variable"]
+        unname(unlist(x[tolower(x$required)=="yes", "variable"]))
     })
 }
-
 
 
 mapper_columns <- function(coldct) {
