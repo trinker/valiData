@@ -95,7 +95,7 @@ validate_file <- function(path, file_name, map, ...){
         }
 
             ## This runs only if table was not empty (previous step)
-            if (file_name %in% map[["table_level"]][["required_columns"]]){
+            if (file_name %in% names(map[["table_level"]][["required_columns"]])){
                 required_columns <- vt_required_columns(data, map, file_name=file_name)
             } else {
                 required_columns <- NULL
