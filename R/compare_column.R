@@ -37,7 +37,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     }
 
     ## check for duplicate rows minus the personal identifier
-    dupes <- vt_duplicated_rows(parent_table[, !parent_table %in% c(parent.column)])
+    dupes <- vt_duplicated_rows(parent_table[, !parent_table %in% c(parent.column)], parent)
     if (!dupes[['valid']]) {return(dupes)}
 
     validated <- lapply(stats::na.omit(child_file), function(x){
