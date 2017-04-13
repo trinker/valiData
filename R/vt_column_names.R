@@ -77,8 +77,8 @@ print.vt_column_names <- function(x, ...){
 		message <- sprintf(
 			paste0(header("Column Names Test"),
 				"'%s' has column names that do not match the expected template column names.\n",
-				"The following column names are not present in '%s' but expected:\n\n%s\n\n\n\n",
-				"%s"
+				"The following column names are NOT present in '%s' but expected:\n\n%s\n\n\n\n",
+				"The following column names are present in but NOT expected:\n\n%s\n\n\n\n"
 			),
 			x[["file_name"]],
 			#additional,
