@@ -39,7 +39,7 @@ vt_column_names <- function(data, map, ignore.case = FALSE, ignore.space = FALSE
 	nullify <- function(x) {if(length(x) == 0) NULL else x}
 
 	colnms <- list(
-		valid = length(not_found) == 0 ,                          ## logical did enough (proportion) elements validate
+		valid = length(not_found) == 0  && length(not_expected,       ## logical did enough (proportion) elements validate
 		locations =  list(                                            ## location of those not validating
 			missing_headers = nullify(not_found),
 			unexpected_headers = nullify(not_expected)
