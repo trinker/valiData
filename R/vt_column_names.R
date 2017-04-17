@@ -74,17 +74,31 @@ print.vt_column_names <- function(x, ...){
 			additional2 <- ""
 		}
 
+	    if (!is.null(x[["locations"]][["missing_headers"]])) {
+	        present <- sprintf("The following column names are NOT present in '%s' but expected:\n\n%s\n\n\n\n",
+                  x[["file_name"]],
+	            paste(paste0("\t- ", x[["locations"]][["missing_headers"]]), collapse = "\n")
+              )
+	    } else {
+	        present <- ""
+	    }
+
+	    if (!is.null(x[["locations"]][["unexpected_headers"]])) {
+	        notpresent <- sprintf("The following column names are present in '%s' but NOT expected:\n\n%s\n\n\n\n",
+                  x[["file_name"]],
+	            additional2
+              )
+	    } else {
+	        notpresent <- ""
+	    }
+
 		message <- sprintf(
 			paste0(header("Column Names Test"),
 				"'%s' has column names that do not match the expected template column names.\n",
-				"The following column names are NOT present in '%s' but expected:\n\n%s\n\n\n\n",
-				"The following column names are present in but NOT expected:\n\n%s\n\n\n\n"
+				present,
+				notpresent
 			),
-			x[["file_name"]],
-			#additional,
-			x[["file_name"]],
-	        paste(paste0("\t- ", x[["locations"]][["missing_headers"]]), collapse = "\n"),
-			additional2
+			x[["file_name"]]
 		)
 
 		class(message) <- c('invalid_report', "character")
