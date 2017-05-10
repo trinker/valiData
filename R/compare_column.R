@@ -80,7 +80,7 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
         is_valid <- data[[yc]] %in% data2[[xc]]
 
         is_valid[is_na] <- NA
-        are_valid <- all(is_valid)
+        are_valid <- all(is_valid, na.rm = TRUE)
 
         if (!are_valid) {
             message <- sprintf("The following rows of %s contain elements not found in %s:\n\n%s\n\n\n\n",
