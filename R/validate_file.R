@@ -95,7 +95,10 @@ validate_file <- function(path, file_name, map, ...){
         }
 
             ## This runs only if table was not empty (previous step)
-            if (file_name %in% names(map[["table_level"]][["required_columns"]])){
+            ## and header is found
+            header_found <- isTRUE(header[['valid']])|is.null(header)## this required b/c can't match required fields if no header is found 5/11/2017
+
+            if ((file_name %in% names(map[["table_level"]][["required_columns"]])) & header_found){
                 required_columns <- vt_required_columns(data, map, file_name=file_name)
             } else {
                 required_columns <- NULL
@@ -106,8 +109,6 @@ validate_file <- function(path, file_name, map, ...){
             } else {
                 columns_order <- NULL
             }
-
-
 
             if (map[["table_level"]][["duplicate_rows"]]){
                 duplicated_rows <- vt_duplicated_rows(data, file_name=file_name)
@@ -158,6 +159,8 @@ validate_file <- function(path, file_name, map, ...){
     }
 
 }
+
+
 
 
 
