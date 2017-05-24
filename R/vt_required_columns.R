@@ -53,7 +53,7 @@ vt_required_columns <- function(data, map, missing = c("", "NULL", "NA", "N/A", 
 
 	list(cols =  map_cols[is.element(gsub("\\s+", "", tolower(map_cols)), names(required_columns))]
 		 , valid = all(required_df[["valid"]]) & length(required_and_absent) == 0
-		 , locations =  sort(unique(unlist(lapply(required_list, function(x) x[["locations"]] ) )))
+		 , locations =  sort(unique(unlist(lapply(required_list, function(x) x[["locations"]] ) ))) - 1
 		 , proportions = mean(required_df[["proportions"]])
 		 , call = unique(required_df[["call"]])
 		 , required = unique(required_df[["required"]])
@@ -89,7 +89,7 @@ print.vt_required_columns <- function(x, ...) {
 	        missing_cols_message <- sprintf(
     			paste0(
     			    "'%s' does not contain the following required columns:\n\n%s\n\n",
-    			    "This problem may be caused by misspelling column names or ommitting them from thefile."
+    			    "This problem may be caused by misspelling column names or ommitting them from the file."
     			),
 			    x[["file_name"]],
      			paste(paste0("\t-", x[["required_and_absent"]]), collapse ="\n")

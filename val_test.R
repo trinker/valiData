@@ -5,21 +5,13 @@ clDev::source_R_folder()
 
 wkd <- cl::l_drive_go("fdu")
 
-file <- cl::go(wkd, "Accounts/AccountImports/CL faculty users.csv")
+file <- "C:\\Users\\trinker\\Desktop\\TestCore/uab/Accounts/AccountImports/accounts_University of Alabama at Birmingham_5_24_2017 10_14_07 AM.csv"
 
-map_wkd <- cl::l_drive_go("/swiper/DataScience/data_quality/core_data_mapping")
-
-col_map_loc <- cl::go(map_wkd,"column_mapping.rds")
-col_map <- readRDS(col_map_loc)
-
-map_loc <- cl::go(map_wkd,"core_data_map.rds")
-core_data_map <- readRDS(map_loc)
+map_loc <- 'C:\\Users\\trinker\\Desktop\\TestCore\\bin/Core_Data_Dictionary_DS_longforms.xlsx'
+map <- import_map(map_loc)
 
 
-valiData::
-    valiData(path=wkd, )
-
-validate_file(file, core_data_map=core_data_map, column_map=col_map)
+validate_file(file, "accountimports" , map)
 
 
 
