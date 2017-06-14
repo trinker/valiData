@@ -26,7 +26,7 @@ vt_header <- function(data, map, file_name = NULL){
     if (is.null(file_name)) file_name <- "The file"
 
     headr <- list(
-        valid = sum(colnames(data) %in% names(map[["column_level"]][[file_name]])) > 0,  ## logical did enough (proportion) elements validate
+        valid = sum(tolower(colnames(data)) %in% tolower(names(map[["column_level"]][[file_name]]))) > 0,  ## logical did enough (proportion) elements validate
         locations = NULL,                        ## location of those not validating
         call = "vt_header",                        ## function name that was called
         file_name = file_name,
