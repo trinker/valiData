@@ -16,9 +16,7 @@
 vc_cipcode <- function(data, x, ...){
 
     ## select the column & replace missing with NA
-    ## col <- sub_out_missing(data[[x]])  ## remove missing substitution as
-    ##                                       we do not allow NULL etc on 2017-06-28
-    col <- data[[x]]
+    col <- sub_out_missing(data[[x]], missing = c())
 
     ## record missing (NA)
     is_na <- is.na(col)
