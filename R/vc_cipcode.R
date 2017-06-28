@@ -16,7 +16,8 @@
 vc_cipcode <- function(data, x, ...){
 
     ## select the column & replace missing with NA
-    col <- sub_out_missing(data[[x]])
+    ## col <- sub_out_missing(data[[x]])  ## remove missing substitution as
+    ##                                       we do not allow NULL etc on 2017-06-28
 
     ## record missing (NA)
     is_na <- is.na(col)
@@ -26,7 +27,7 @@ vc_cipcode <- function(data, x, ...){
     #    ##removed regex validation below to be specific 11/02/2016
     #    #cipregex <- "(^0$)(*SKIP)(*FAIL)|((^\\s*\\d{1,2}\\.??\\s*$)|(^\\s*\\d{1,2}\\.(\\d{2,4})\\s*$))"
     #    #is_valid <- grepl(cipregex, col, perl=TRUE)
-# browser()
+
     is_valid <- col %in% valid_cips_all
     is_valid[is_na] <- NA
 

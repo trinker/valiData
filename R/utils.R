@@ -82,7 +82,7 @@ find_highest_parent_folder <- function(path) {
 
 
 ## function to sub out empty values with R NA
-sub_out_missing <- function(x, ...){
-    x[(x %in% c("NULL", "NA", "N/A", "na", "n/a")) | grepl("^\\s*$", x)] <- NA
+sub_out_missing <- function(x, missing = c("NULL", "NA", "N/A", "na", "n/a"), ...){
+    x[(x %in% missing) | grepl("^\\s*$", x)] <- NA
     x
 }
