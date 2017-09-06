@@ -12,6 +12,7 @@
 mapper <- function(dict_list){
     map <- mapper_table_files(dict_list[["tfdct"]])
     map$table$required_columns <- mapper_required_columns(dict_list[["coldct"]])
+    map$table$required_headers <- mapper_required_headers(dict_list[["coldct"]])
     map$column <- mapper_columns(dict_list[["coldct"]])
     stats::setNames(map, c("file_level", "table_level", "column_level") )
 }
@@ -33,6 +34,13 @@ mapper_required_columns <- function(d){
     })
 }
 
+## a header is required but not required to be filled
+mapper_required_headers <- function(d){
+    dd <- split(d, d[["file"]])
+    lapply(dd, function(x){
+        unname(unlist(x[tolower(x$required)=="yes-header", "variable"]))
+    })
+}
 
 mapper_columns <- function(coldct) {
     dd <- split(coldct, coldct[["file"]])

@@ -104,6 +104,15 @@ validate_file <- function(path, file_name, map, ...){
                 required_columns <- NULL
             }
 
+            if ((file_name %in% names(map[["table_level"]][["required_headers"]])) & header_found){
+                required_headers <- vt_required_headers(data, map,
+                    ignore.case=ignore_case, ignore.space=ignore_space,
+                    file_name=file_name
+                )
+            } else {
+                required_headers <- NULL
+            }
+
             if (map[["table_level"]][["column_order"]]){
                 columns_order <- vt_column_order(data, map, file_name=file_name)
             } else {
@@ -135,7 +144,8 @@ validate_file <- function(path, file_name, map, ...){
                 file_level = list(empty_file = empty_file, broken_csv = broken_csv),
                 table_level = list(header = header, spaced_columns = spaced_columns,
                     column_names = column_names, non_empty = non_empty,
-                    required_columns = required_columns, duplicated_rows = duplicated_rows,
+                    required_columns = required_columns, required_headers = required_headers,
+                    duplicated_rows = duplicated_rows,
                     non_ASCII = non_ASCII, na_only_rows= na_only_rows),
                 column_level = columns_as_expected,
                 path = path,

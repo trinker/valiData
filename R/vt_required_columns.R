@@ -30,7 +30,6 @@ vt_required_columns <- function(data, map, missing = c("", "NULL", "NA", "N/A", 
 	required_list <- invisible(lapply(required_columns, vc_non_response,
 		prop.acceptable = prop.acceptable, missing = missing, required = TRUE))
 
-
 	# Dear Future DS_subjugate,
 	# We (Steve-n-Tyler) added unique to defining cols below because CrossListing import
 	# allows for SectionIdentifier to show up multiple times

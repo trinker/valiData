@@ -2,9 +2,12 @@
 % Please edit documentation in R/vc_credits.R
 \name{vc_credits}
 \alias{vc_credits}
+\alias{vc_credits2}
 \title{Validates and If Formatted Like Credit}
 \usage{
 vc_credits(data, x, ...)
+
+vc_credits2(data, x, ...)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -18,8 +21,9 @@ Validates and If Formatted Like Credit
 }
 \examples{
 dat <- data.frame(
-    credits = c(NA, 1.21, 1.34, '4.0', '5.0', .1, 12, 1111),
+    credits = c(NA, 1.21, 1.34, '4.0', '5.0', .1, 12, 123.5, 1111, 12.123),
     stringsAsFactors = FALSE
 )
 vc_credits(dat, 'credits')
+vc_credits2(dat, 'credits')
 }

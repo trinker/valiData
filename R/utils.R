@@ -61,8 +61,8 @@ delete_old_reports <- function(path){
 										  	grepl(pattern="`Reports", dir(path, recursive=TRUE))
 										  	]) %>%
 		sapply(.,function(x) gsub("//","/", x), USE.NAMES = FALSE) %>%
-		sapply(., function(x) {
-			paste(strsplit(x, "/")[[1]] %>% .[1:length(.)-1], collapse="/")
+		sapply(., function(x) { #went from 1:length(.)-1 to 1:(length(.)-1) on 9/6/2017 as the former seq and subtracts one
+			paste(strsplit(x, "/")[[1]] %>% .[1:(length(.)-1)], collapse="/")
 		}
 		, USE.NAMES=FALSE)
 
