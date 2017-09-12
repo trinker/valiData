@@ -442,6 +442,8 @@ valid_cips <- c("1", "1.01", "1.0101", "1.0102", "1.0103", "1.0104", "1.0105",
     "9.1001", "9.99", "9.9999")
 
 
+valid_cips <- gsub('(\\.\\d{3}$)', '\\10', valid_cips)
+
 ##CIP must be 2, 4 or 6 digits (not including decimals)
 singles <- stringi::stri_pad_left(grep('^\\d{1,2}$', valid_cips, value=TRUE), 2, pad = '0')
 singles_augmented <- unlist(lapply(c('', '.', '.00', '.0000'), function(x) paste0(singles, x)))
