@@ -46,8 +46,6 @@ compare_column <- function(path, parent.column, child.column = parent.column,
         vc_id_found(data=child_table, x=parent.column, y=child.column, data2 = parent_table, ignore.case=ignore.case, parent=parent, child=child)
     })
 
-
-
     dir_info <- invisible(lapply(stats::na.omit(child_file), function(x){
         file_name <- basename(dirname(x))
 
@@ -66,6 +64,26 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
 }
 
+#  did_id_check_work8 <- try(
+#          compare_column(
+#          path = basename(path),
+#          parent.column='OrgUnitIdentifier',
+#          parent='OrgUnit',
+#          child = c('OrgUnit'),
+#          child.column = 'ParentIdentifier',
+#          ignore.case = TRUE
+#          )
+#      )
+#    did_id_check_work7 <- try(
+#         valiData:::compare_column(
+# 		path = basename(path),
+# 		parent.column='TermIdentifier',
+# 		parent='AcademicTerm',
+# 		child = c('Section'),
+# 		ignore.case = TRUE
+#         )
+#     )
+
 
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', child = '', ...) {
 
@@ -83,8 +101,8 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
         are_valid <- all(is_valid, na.rm = TRUE)
 
         if (!are_valid) {
-            message <- sprintf("The following rows of %s/%s contain elements not found in %s/%s:\n\n%s\n\n\n\n",
-                child, sQuote(y), parent, sQuote(x), output_truncate(which(!is_valid)))
+            message <- sprintf("The following rows of '%s/%'s contain elements not found in '%s/%s':\n\n%s\n\n\n\n",
+                parent, x, child, y, output_truncate(which(!is_valid)))
         } else {
             message <- NULL
         }
