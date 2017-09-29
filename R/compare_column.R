@@ -101,7 +101,7 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
         are_valid <- all(is_valid, na.rm = TRUE)
 
         if (!are_valid) {
-            message <- sprintf("The following rows of '%s/%'s contain elements not found in '%s/%s':\n\n%s\n\n\n\n",
+            message <- sprintf("The following rows of '%s/%s' contain elements not found in '%s/%s':\n\n%s\n\n\n\n",
                 parent, x, child, y, output_truncate(which(!is_valid)))
         } else {
             message <- NULL
