@@ -5,13 +5,13 @@ clDev::source_R_folder()
 
 wkd <- cl::l_drive_go("fdu")
 
-file <- "C:\\Users\\trinker\\Desktop\\TestCore/uab/Accounts/AccountImports/accounts_University of Alabama at Birmingham_5_24_2017 10_14_07 AM.csv"
-
+file <- "C:\\Users\\trinker\\Desktop\\TestCore\\Clarion\\Courses\\Course/Course.csv"
+loc <- "C:\\Users\\trinker\\Desktop\\TestCore/IW Demographics"
 map_loc <- 'C:\\Users\\trinker\\Desktop\\TestCore\\bin/Core_Data_Dictionary_DS_longforms.xlsx'
 map <- import_map(map_loc)
 
-
-validate_file(file, "accountimports" , map)
+valiData(loc, map)
+validate_file(file, "course" , map)
 
 
 
