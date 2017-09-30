@@ -66,17 +66,6 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
 }
 
-setwd("C:/Users/trinker/Desktop/TestCore")
-did_id_check_work2 <- try(
-    compare_column(
-	path = basename(path),
-	parent.column='PersonIdentifier',
-	parent='AccountImports',
-	child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
-	ignore.case = TRUE
-    )
-)
-
 
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', child = '', ...) {
 
@@ -94,7 +83,7 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
         are_valid <- all(is_valid, na.rm = TRUE)
 
         if (!are_valid) {
-            message <- sprintf("The following rows of '%s' (in the %s field) contain elements not found in '%s' (in the %s field):\n\n%s\n\n\n\n",
+            message <- sprintf("The following rows of '%s' (in the %s column) contain elements not found in '%s' (in the %s column):\n\n%s\n\n\n\n",
                 child, y, parent, x,  output_truncate(which(!is_valid)))
         } else {
             message <- NULL
