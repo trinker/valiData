@@ -43,7 +43,9 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     validated <- lapply(stats::na.omit(child_file), function(x){
         child_table <- suppressWarnings(readr::read_csv(x))
         if (isTRUE(ignore.case)){colnames(child_table) <- tolower(colnames(child_table))}
-        vc_id_found(data=child_table, x=parent.column, y=child.column, data2 = parent_table, ignore.case=ignore.case, parent=parent, child=child)
+
+        vc_id_found(data=child_table, x=parent.column, y=child.column,
+            data2 = parent_table, ignore.case=ignore.case, parent=parent, child=basename(dirname(x)))
     })
 
     dir_info <- invisible(lapply(stats::na.omit(child_file), function(x){
@@ -64,25 +66,16 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
 }
 
-#  did_id_check_work8 <- try(
-#          compare_column(
-#          path = basename(path),
-#          parent.column='OrgUnitIdentifier',
-#          parent='OrgUnit',
-#          child = c('OrgUnit'),
-#          child.column = 'ParentIdentifier',
-#          ignore.case = TRUE
-#          )
-#      )
-#    did_id_check_work7 <- try(
-#         valiData:::compare_column(
-# 		path = basename(path),
-# 		parent.column='TermIdentifier',
-# 		parent='AcademicTerm',
-# 		child = c('Section'),
-# 		ignore.case = TRUE
-#         )
-#     )
+setwd("C:/Users/trinker/Desktop/TestCore")
+did_id_check_work2 <- try(
+    compare_column(
+	path = basename(path),
+	parent.column='PersonIdentifier',
+	parent='AccountImports',
+	child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
+	ignore.case = TRUE
+    )
+)
 
 
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', child = '', ...) {
@@ -101,7 +94,7 @@ vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent
         are_valid <- all(is_valid, na.rm = TRUE)
 
         if (!are_valid) {
-            message <- sprintf("The following rows of '%s/%s' contain elements not found in '%s/%s':\n\n%s\n\n\n\n",
+            message <- sprintf("The following rows of '%s' (in the %s field) contain elements not found in '%s' (in the %s field):\n\n%s\n\n\n\n",
                 child, y, parent, x,  output_truncate(which(!is_valid)))
         } else {
             message <- NULL
