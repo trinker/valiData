@@ -30,11 +30,17 @@ print.report_print_arbitrary <- function(x, ...){
 
 
 get_paths_to_csvs <- function(path){
+# browser()
     . <- NULL
-	invisible(lapply(dir(path, pattern = ".csv$|.CSV$",recursive = TRUE), function(x) file.path(path,x))) %>%
+	paths <- lapply(dir(path, pattern = "\\.(csv|CSV)$",recursive = TRUE), function(x) file.path(path,x)) %>%
 		sapply(., "[[",1) %>%
 		sapply(.,function(x) gsub("//","/", x), USE.NAMES = FALSE) %>%
-		sapply(.,function(x) gsub("~",path.expand("~"), x), USE.NAMES = FALSE)
+		sapply(.,function(x) gsub("~", path.expand("~"), x), USE.NAMES = FALSE)
+
+	grpd <- split(paths, dirname(paths))
+
+    unname(unlist(lapply(grpd, `[`, 1)))
+
 }
 
 # report on which folders had no csv files to report on

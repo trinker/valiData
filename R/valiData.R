@@ -41,10 +41,11 @@ valiData <- function(path, map, ...) {
 # if (!file.exists(report_path)) dir.create(report_path)
 
 
-    # report on which folders had no csv files to report on
+    # report on which folders had no or too many csv files to report on
     empty_folders <- vd_empty_subfolders(path)
+    multiple_csv <- vd_multiple_csv(path)
 
-    has_files <- length(dir(path, pattern = paste0("\\.", map[["file"]][["type"]],"$")) )>0
+    has_files <- length(dir(path, pattern = paste0("\\.", map[["file"]][["type"]], "$")) ) > 0
 
     # csv_subpaths is only for mapped subfolders that contain csv files
     csv_subpaths <- get_paths_to_csvs(path)
@@ -78,6 +79,7 @@ valiData <- function(path, map, ...) {
         path = path,
         dir_lev = list(
             empty_folders = empty_folders,
+            multiple_csv = multiple_csv,
             unmapped_csv = unmapped_csv
         ),
         per_file = vld
