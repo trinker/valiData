@@ -37,7 +37,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     }
 
     if (isTRUE(ignore.element.case)){
-        parent_table[sapply(parent_table, is.charcater)] <- lapply(parent_table[sapply(parent_table, is.charcater)], tolower)
+        parent_table[sapply(parent_table, is.character)] <- lapply(parent_table[sapply(parent_table, is.character)], tolower)
     }
 
     ## check for duplicate rows minus the personal identifier
@@ -49,7 +49,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
         if (isTRUE(ignore.case)){colnames(child_table) <- tolower(colnames(child_table))}
 
         if (isTRUE(ignore.element.case)){
-            child_table[sapply(child_table, is.charcater)] <- lapply(child_table[sapply(child_table, is.charcater)], tolower)
+            child_table[sapply(child_table, is.character)] <- lapply(child_table[sapply(child_table, is.character)], tolower)
         }
 
         vc_id_found(data=child_table, x=parent.column, y=child.column,

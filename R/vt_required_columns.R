@@ -88,7 +88,7 @@ print.vt_required_columns <- function(x, ...) {
 	        missing_cols_message <- sprintf(
     			paste0(
     			    "'%s' does not contain the following required columns:\n\n%s\n\n",
-    			    "This problem may be caused by misspelling column names or ommitting them from the file."
+    			    "This problem may be caused by misspelling column names or omitting them from the file."
     			),
 			    x[["file_name"]],
      			paste(paste0("\t-", x[["required_and_absent"]]), collapse ="\n")
