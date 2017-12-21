@@ -1,6 +1,6 @@
 ## This file is for internal use
 compare_column <- function(path, parent.column, child.column = parent.column,
-    parent, child, ignore.case = TRUE, ...) {
+    parent, child, ignore.case = TRUE, ignore.element.case = FALSE, ...) {
 
     . <- NULL
 
@@ -36,6 +36,10 @@ compare_column <- function(path, parent.column, child.column = parent.column,
         colnames(parent_table) <- tolower(colnames(parent_table))
     }
 
+    if (isTRUE(ignore.element.case)){
+        parent_table[sapply(parent_table, is.charcater)] <- lapply(parent_table[sapply(parent_table, is.charcater)], tolower)
+    }
+
     ## check for duplicate rows minus the personal identifier
     dupes <- vt_duplicated_rows(parent_table[, !parent_table %in% c(parent.column)], parent)
     if (!dupes[['valid']]) {return(dupes)}
@@ -43,6 +47,10 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     validated <- lapply(stats::na.omit(child_file), function(x){
         child_table <- suppressWarnings(readr::read_csv(x))
         if (isTRUE(ignore.case)){colnames(child_table) <- tolower(colnames(child_table))}
+
+        if (isTRUE(ignore.element.case)){
+            child_table[sapply(child_table, is.charcater)] <- lapply(child_table[sapply(child_table, is.charcater)], tolower)
+        }
 
         vc_id_found(data=child_table, x=parent.column, y=child.column,
             data2 = parent_table, ignore.case=ignore.case, parent=parent, child=basename(dirname(x)))
