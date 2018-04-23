@@ -30,7 +30,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     parent_file <- csv_subpaths[match(parent, folder)]
     child_file <- csv_subpaths[match(child, folder)]
 
-    parent_table <- suppressWarnings(readr::read_csv(parent_file))
+    parent_table <- suppressWarnings(readr::read_csv(parent_file, col_types = 'c'))
 
     if (isTRUE(ignore.case)){
         colnames(parent_table) <- tolower(colnames(parent_table))
@@ -45,8 +45,12 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     if (!dupes[['valid']]) {return(dupes)}
 
     validated <- lapply(stats::na.omit(child_file), function(x){
-        child_table <- suppressWarnings(readr::read_csv(x))
-        if (isTRUE(ignore.case)){colnames(child_table) <- tolower(colnames(child_table))}
+
+        child_table <- suppressWarnings(readr::read_csv(x, col_types = 'c'))
+
+        if (isTRUE(ignore.case)){
+            colnames(child_table) <- tolower(colnames(child_table))
+        }
 
         if (isTRUE(ignore.element.case)){
             child_table[sapply(child_table, is.character)] <- lapply(child_table[sapply(child_table, is.character)], tolower)
