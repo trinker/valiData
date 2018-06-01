@@ -1,6 +1,6 @@
 Package: valiData
 Title: Data Validation
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: c(person("Steve", "Simpson", email =
         "steven.troy.simpson@gmail.com", role = c("aut", "cre")),
         person("Tyler", "Rinker", email = "tyler.rinker@gmail.com",
@@ -22,8 +22,7 @@ Imports:
     data.table,
     clipr,
     googlesheets
-Date: 2017-09-06
-License: GPL-2
+License: MIT
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 6.0.1
