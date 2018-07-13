@@ -50,7 +50,13 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
         if (isTRUE(ignore.case)){
             colnames(child_table) <- tolower(colnames(child_table))
+            child.column <- tolower(child.column)
+            parent.column <- tolower(parent.column)
         }
+
+        parent_table <- parent_table[,colnames(parent_table) %in% parent.column, drop = FALSE]
+        child_table <- child_table[,colnames(child_table) %in% child.column, drop = FALSE]
+
 
         if (isTRUE(ignore.element.case)){
             child_table[sapply(child_table, is.character)] <- lapply(child_table[sapply(child_table, is.character)], tolower)

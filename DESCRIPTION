@@ -1,6 +1,6 @@
 Package: valiData
 Title: Data Validation
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: c(person("Steve", "Simpson", email =
         "steven.troy.simpson@gmail.com", role = c("aut", "cre")),
         person("Tyler", "Rinker", email = "tyler.rinker@gmail.com",
