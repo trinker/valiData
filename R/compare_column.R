@@ -27,6 +27,8 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     lens <- sapply(parsed, length) - 1
     folder <- unlist(Map(function(x, y){x[y]}, parsed, lens))
 
+    if(length(match(child, folder)) == 1 & is.na(match(child, folder))) return(invisible(NULL))
+
     parent_file <- csv_subpaths[match(parent, folder)]
     child_file <- csv_subpaths[match(child, folder)]
 
@@ -68,7 +70,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
             data2 = parent_table, ignore.case=ignore.case, parent=parent, child=basename(dirname(x)))
 
     })
-
+# browser()
     if (sum(!unlist(lapply(validated, is.null))) == 0) return(invisible(NULL))
 
     if (sum(unlist(lapply(validated, is.null))) > 0) {
