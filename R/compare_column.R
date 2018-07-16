@@ -27,6 +27,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     lens <- sapply(parsed, length) - 1
     folder <- unlist(Map(function(x, y){x[y]}, parsed, lens))
 
+    if(length(match(parent, folder)) == 1 & is.na(match(parent, folder))) return(invisible(NULL))
     if(length(match(child, folder)) == 1 & is.na(match(child, folder))) return(invisible(NULL))
 
     parent_file <- csv_subpaths[match(parent, folder)]
