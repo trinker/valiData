@@ -9,6 +9,7 @@
 #' vd_dir(system.file())
 #' vd_dir(system.file("INDEX"))
 vd_dir <- function(path, ...) {
+
 	out <- list(
 		valid = file.info(path)[["isdir"]],
 	    message = paste0(header("Directory Test", char="~"),

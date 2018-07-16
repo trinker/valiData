@@ -55,6 +55,8 @@ compare_column <- function(path, parent.column, child.column = parent.column,
         }
 
         parent_table <- parent_table[,colnames(parent_table) %in% parent.column, drop = FALSE]
+
+        if (sum(colnames(child_table) %in% child.column) == 0) return(NULL)
         child_table <- child_table[,colnames(child_table) %in% child.column, drop = FALSE]
 
 
@@ -64,7 +66,14 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
         vc_id_found(data=child_table, x=parent.column, y=child.column,
             data2 = parent_table, ignore.case=ignore.case, parent=parent, child=basename(dirname(x)))
+
     })
+
+    if (sum(!unlist(lapply(validated, is.null))) == 0) return(invisible(NULL))
+
+    if (sum(unlist(lapply(validated, is.null))) > 0) {
+        validated <- validated[!unlist(lapply(validated, is.null))]
+    }
 
     dir_info <- invisible(lapply(stats::na.omit(child_file), function(x){
         file_name <- basename(dirname(x))
