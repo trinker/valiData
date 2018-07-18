@@ -19,10 +19,10 @@ validate_file(file, "accounts" , map)
 path <- loc
 
 compare_column(
-            path = path,
-            parent.column='OrgUnitIdentifier',
-            parent='OrgUnit',
-            child = c('Course', 'Section'),
-            ignore.case = TRUE,
-            ignore.element.case = TRUE
-        )
+         path = path,
+         parent.column='SectionIdentifier',
+         child.column = 'Identifier',
+         parent='Section',
+         child = c('SectionAttribute'),
+         ignore.case = TRUE
+         )
