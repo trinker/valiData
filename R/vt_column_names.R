@@ -92,12 +92,18 @@ print.vt_column_names <- function(x, ...){
 	        notpresent <- ""
 	    }
 
+	    bad_cols <- paste0(header("Column Names Test"),
+			"'%s' has column names that do not match the expected template column names.\n",
+			present,
+			notpresent
+		)
+
+	    if (nchar(bad_cols) > 7.5e3) {
+	        bad_cols <- gsub('\n[^\n]*$', '', substring(bad_cols, 1, 7.5e3))
+	    }
+
 		message <- sprintf(
-			paste0(header("Column Names Test"),
-				"'%s' has column names that do not match the expected template column names.\n",
-				present,
-				notpresent
-			),
+			bad_cols,
 			x[["file_name"]]
 		)
 
