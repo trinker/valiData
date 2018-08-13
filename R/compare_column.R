@@ -74,10 +74,6 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 # browser()
     if (sum(!unlist(lapply(validated, is.null))) == 0) return(invisible(NULL))
 
-    if (sum(unlist(lapply(validated, is.null))) > 0) {
-        validated <- validated[!unlist(lapply(validated, is.null))]
-    }
-
     dir_info <- invisible(lapply(stats::na.omit(child_file), function(x){
         file_name <- basename(dirname(x))
 
@@ -89,6 +85,13 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
     }))
 
+    if (sum(unlist(lapply(validated, is.null))) > 0) {
+        dir_info <- dir_info[!unlist(lapply(validated, is.null))]
+        validated <- validated[!unlist(lapply(validated, is.null))]
+    }
+
+
+# browser()
     out <- list(dir_info = dir_info, validated = validated)
 
     class(out) <- 'compare_column'
