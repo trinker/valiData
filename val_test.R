@@ -7,8 +7,8 @@ clDev::source_R_folder()
 
 
 
-inst <- 'college'
-file <- sprintf("C:\\Users\\trinker\\Desktop\\TestCore\\%s/Accounts/AccountImports/00_ACCOUNTS.csv", inst)
+inst <- 'SCSU'
+file <- sprintf("C:\\Users\\trinker\\Desktop\\TestCore\\%s/Accounts/AccountImports/CampusLab Accounts Students Faculty Staff.csv", inst)
 loc <- sprintf("C:\\Users\\trinker\\Desktop\\TestCore/%s", inst)
 map_loc <- 'C:\\Users\\trinker\\Desktop\\TestCore\\bin/Core_Data_Dictionary_DS_longforms.xlsx'
 map <- import_map(map_loc)
@@ -18,10 +18,12 @@ validate_file(file, "accounts" , map)
 
 path <- loc
 
+
 compare_column(
-        path = path,
-        parent.column='PersonIdentifier',
-        parent='AccountImports',
-        child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
-        ignore.case = TRUE
+            path = path,
+            parent.column='OrgUnitIdentifier',
+            parent='OrgUnit',
+            child = c('Course', 'Section'),
+            ignore.case = TRUE,
+            ignore.element.case = TRUE
         )

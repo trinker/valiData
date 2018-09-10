@@ -12,7 +12,7 @@
 #' vc_categories(mtcars, 'cyl', c(6, 8))
 #' str(vc_categories(mtcars, 'cyl', c(6, 8)))
 vc_categories <- function(data, x, levels = "the levels", ...){
-
+ # browser()
     ## select the column & replace missing with NA
     col <- sub_out_missing(data[[x]])
 

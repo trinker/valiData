@@ -135,7 +135,7 @@ validate_file <- function(path, file_name, map, ...){
             if (non_ASCII[['valid']]|is.null(non_ASCII)) {
                 data[] <- lapply(data, function(x) gsub("[[:cntrl:]]", "", suppressWarnings(stringi::stri_enc_toascii(x))))
             }
-
+# browser()
 
             ## column level testing
             columns_as_expected <- vc_column_apply(data, map[["column_level"]][[file_name]])
