@@ -4,8 +4,8 @@
 \alias{vt_required_headers}
 \title{Validate that a CSV's Required Headers Are There}
 \usage{
-vt_required_headers(data, map, ignore.case = FALSE, ignore.space = FALSE,
-  file_name = NULL)
+vt_required_headers(data, map, ignore.case = FALSE,
+  ignore.space = FALSE, file_name = NULL)
 }
 \arguments{
 \item{data}{\code{\link[base]{data.frame}}.}

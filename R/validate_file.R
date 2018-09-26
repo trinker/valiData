@@ -32,12 +32,21 @@ validate_file <- function(path, file_name, map, ...){
         ##---------------##
         ## Check columns ##
         ##---------------##
-
+# browser()
         ## get data
 ## read in all cols as character...this may have future implications when we expect numeric
-        data <- suppressWarnings(readr::read_csv(path, col_types = readr::cols(.default = "c")))
-        colnames(data) <- gsub("^[^ -~]|_\\d+$", "", colnames(data))  # put in to remove the <U+FEFF> character read_csv puts in first column header 8/15/2016
+        data <- try(suppressWarnings(readr::read_csv(path, col_types = readr::cols(.default = "c"))))
+        if (inherits(data, 'try-error')){
+            data2 <- try(suppressWarnings(readr::read_csv(path, col_names = FALSE,
+                col_types = readr::cols(.default = "c"))))
 
+            if (!inherits(data2, 'try-error')){
+                data <- data2
+            }
+        }
+
+        colnames(data) <- gsub("^[^ -~]|_\\d+$", "", colnames(data))  # put in to remove the <U+FEFF> character read_csv puts in first column header 8/15/2016
+# browser()
         ## converting broken rows from broken_csv to NA
         if (!broken_csv[["valid"]] && broken_csv[["error"]]=="comma-broken"){
             data[broken_csv[["locations"]][["rows"]]-1, ] <- NA

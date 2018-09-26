@@ -27,7 +27,7 @@ vf_csv_broken <- function(path, ...){
     cols  <- NULL
     proportion <- NULL
 
-    data <- suppressWarnings(readr::read_csv(path))
+    data <- suppressWarnings(readr::read_csv(path, col_names = FALSE))
 
     problem_cases <- readr::problems(data)
 
@@ -76,7 +76,7 @@ vf_csv_broken <- function(path, ...){
 
             ## Extract offending rows (index the grep from offending problems on the
             ## 'row' column from `problems` output)
-            offender_rows <- problem_cases[["row"]][offending_problems]
+            offender_rows <- 1 + (problem_cases[["row"]][offending_problems])
 
             ## find any columns that could be considered character class
             cols <- candidates_for_quotes(path)
