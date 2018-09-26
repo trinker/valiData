@@ -33,7 +33,11 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     parent_file <- csv_subpaths[match(parent, folder)]
     child_file <- csv_subpaths[match(child, folder)]
 
-    parent_table <- suppressWarnings(readr::read_csv(parent_file, col_types = readr::cols(.default = "c")))
+    #parent_table <- suppressWarnings(readr::read_csv(parent_file, col_types = readr::cols(.default = "c")))
+    parent_table <- read_csv_check(parent_file)
+    if (!is.data.frame(parent_table)) (return(NULL))
+
+
 
     if (isTRUE(ignore.case)){
         colnames(parent_table) <- tolower(colnames(parent_table))
@@ -49,7 +53,8 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
     validated <- lapply(stats::na.omit(child_file), function(x){
 
-        child_table <- suppressWarnings(readr::read_csv(x, col_types = readr::cols(.default = "c")))
+        child_table <- read_csv_check(child_file)
+        if (!is.data.frame(child_table)) (return(NULL))
 
         if (isTRUE(ignore.case)){
             colnames(child_table) <- tolower(colnames(child_table))
@@ -99,6 +104,22 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
 }
 
+read_csv_check <- function(path, ...){
+
+    data <- try(suppressWarnings(readr::read_csv(path, col_types = readr::cols(.default = "c"))))
+    if (inherits(data, 'try-error')){
+        data2 <- try(suppressWarnings(readr::read_csv(path, col_names = FALSE,
+            col_types = readr::cols(.default = "c"))))
+
+        if (!inherits(data2, 'try-error')){
+           return('bad header')
+        } else {
+           return('bad not header')
+        }
+    } else {
+        data
+    }
+}
 
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', child = '', ...) {
 
