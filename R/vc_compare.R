@@ -118,7 +118,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
         }
     } else {
         are_valid <- TRUE
-        message <- 'not a second column to compare'
+        message <- NULL
         is_valid <- TRUE
         is_na <- FALSE
 
