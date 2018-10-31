@@ -18,7 +18,7 @@ vc_categories <- function(data, x, levels = "the levels", ...){
 
     ## record missing (NA)
     is_na <- is.na(col)
-
+# browser()
     ## expression to validate against (elementwise)
 	is_valid <- tolower(col) %in% tolower(levels)  # note ignores case
     is_valid[is_na] <- NA
@@ -46,7 +46,7 @@ vc_categories <- function(data, x, levels = "the levels", ...){
         missing = is_na,
         call = 'vc_categories'
     )
-
+# browser()
     class(vc_output) <- 'vc'
     vc_output
 }

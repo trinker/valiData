@@ -11,7 +11,7 @@ vc_column_apply <- function(data, colmap){
         nms = tolower(names(colmap)),
         colmapnams =names(colmap)
     )
-
+# browser()
     locs <- match(tolower(colnames(data)), nms_lookup[['nms']])
     nms <- nms_lookup[['colmapnams']][locs]
     colnames(data)[!is.na(nms)] <- nms[!is.na(nms)]
@@ -24,6 +24,8 @@ vc_column_apply <- function(data, colmap){
     data <- data[names(map)]
 # browser()
     Map(function(x, y, z){
+
+# if (z == "EmailAddress1IsPreferred" ) browser()
         #y <-
         #gsub("\\)$", paste0("data, ", z, "\")"), y)
 # if (tolower(z) == 'deliverymode') browser()

@@ -34,85 +34,95 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     colx <- sub_out_missing(data[[x]])
     coly <- sub_out_missing(data[[y]])
 
-    ## record missing (NA)
-    is_na <- c(is.na(colx))|c(is.na(coly))
+    if (!(is.null(data[[x]]) | is.null(data[[y]]))) {
 
-    if (isTRUE(date)) {
-        ## enable mm/dd/yyyy format
-        slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', colx)
-        zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', colx[slasher_locs], perl=TRUE)
-        colx[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
-        slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', coly)
-        zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', coly[slasher_locs], perl=TRUE)
-        coly[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
-        colx[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
-        coly[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
-    }
+        ## record missing (NA)
+        is_na <- c(is.na(colx))|c(is.na(coly))
+    # if (x == 'EmailAddress2') browser()
+        if (isTRUE(date)) {
+            ## enable mm/dd/yyyy format
+            slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', colx)
+            zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', colx[slasher_locs], perl=TRUE)
+            colx[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
-    if (all(!is_na & is.na(colx))|all(!is_na & is.na(coly))) {
-        message <- sprintf("All of the date formats used in either %s or %s or both do not follow the ISO 8601 required.\n\n\n\n", x, y)
-        is_valid <- rep(FALSE, length(colx))
-        are_valid <- FALSE
+            slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', coly)
+            zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', coly[slasher_locs], perl=TRUE)
+            coly[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
+
+            colx[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
+            coly[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
+        }
+
+        if (all(!is_na & is.na(colx))|all(!is_na & is.na(coly))) {
+            message <- sprintf("All of the date formats used in either %s or %s or both do not follow the ISO 8601 required.\n\n\n\n", x, y)
+            is_valid <- rep(FALSE, length(colx))
+            are_valid <- FALSE
+        } else {
+    # browser()
+            ## expression to validate against (elementwise)
+        	is_valid <- compare(colx, coly, comparison)
+
+        	## valid columnwise: Are all elelemnts either valid or NA?
+        	are_valid <- all(is_valid|is_na)
+
+        # 	## generate the comment
+        # 	if (!are_valid){
+        #         message <- sprintf(
+        #             "The following rows of %s are not valid \nbecause they are %s %s:\n\n%s\n\n\n\n",
+        #                 sQuote(x),
+        #                 switch(comparison,
+        #                     "==" = "not equal to",
+        #                     "!=" = "equal to",
+        #                     ">"  = "not greater than",
+        #                     "<"  = "not less than",
+        #                     ">=" = "not greater than or equal to",
+        #                     "<=" = "not less than or equal to",
+        #                     "~=" = "not almost equal (enough)",
+        #                     "invalid `compare` argument"
+        #                 ),
+        #                 sQuote(y),
+        #                 output_truncate(which(!(is_valid|is_na)))
+        #         )
+        # 	} else {
+        # 	    message <- NULL
+        # 	}
+
+        	if (is.na(are_valid)){
+
+        	  message <- sprintf(
+        	    "The following rows of %s and %s are not valid \nbecause they are all missing values:\n\n%s\n\n\n\n",
+        	    sQuote(x),
+        	    sQuote(y),
+        	    output_truncate(which(!(is_na))) )
+        	} else if (!are_valid) {
+        	  message <- sprintf(
+        	    "The following rows of %s are not valid \nbecause they are %s %s:\n\n%s\n\n\n\n",
+        	    sQuote(x),
+        	    switch(comparison,
+        	           "==" = "not equal to",
+        	           "!=" = "equal to",
+        	           ">"  = "not greater than",
+        	           "<"  = "not less than",
+        	           ">=" = "not greater than or equal to",
+        	           "<=" = "not less than or equal to",
+        	           "~=" = "not almost equal (enough)",
+        	           "invalid `compare` argument"
+        	    ),
+        	    sQuote(y),
+        	    output_truncate(which(!(is_valid|is_na))) )
+        	} else {
+        	  message <- NULL
+        	}
+        }
     } else {
+        are_valid <- TRUE
+        message <- 'not a second column to compare'
+        is_valid <- TRUE
+        is_na <- FALSE
 
-        ## expression to validate against (elementwise)
-    	is_valid <- compare(colx, coly, comparison)
-
-    	## valid columnwise: Are all elelemnts either valid or NA?
-    	are_valid <- all(is_valid|is_na)
-
-    # 	## generate the comment
-    # 	if (!are_valid){
-    #         message <- sprintf(
-    #             "The following rows of %s are not valid \nbecause they are %s %s:\n\n%s\n\n\n\n",
-    #                 sQuote(x),
-    #                 switch(comparison,
-    #                     "==" = "not equal to",
-    #                     "!=" = "equal to",
-    #                     ">"  = "not greater than",
-    #                     "<"  = "not less than",
-    #                     ">=" = "not greater than or equal to",
-    #                     "<=" = "not less than or equal to",
-    #                     "~=" = "not almost equal (enough)",
-    #                     "invalid `compare` argument"
-    #                 ),
-    #                 sQuote(y),
-    #                 output_truncate(which(!(is_valid|is_na)))
-    #         )
-    # 	} else {
-    # 	    message <- NULL
-    # 	}
-
-    	if (is.na(are_valid)){
-
-    	  message <- sprintf(
-    	    "The following rows of %s and %s are not valid \nbecause they are all missing values:\n\n%s\n\n\n\n",
-    	    sQuote(x),
-    	    sQuote(y),
-    	    output_truncate(which(!(is_na))) )
-    	} else if (!are_valid) {
-    	  message <- sprintf(
-    	    "The following rows of %s are not valid \nbecause they are %s %s:\n\n%s\n\n\n\n",
-    	    sQuote(x),
-    	    switch(comparison,
-    	           "==" = "not equal to",
-    	           "!=" = "equal to",
-    	           ">"  = "not greater than",
-    	           "<"  = "not less than",
-    	           ">=" = "not greater than or equal to",
-    	           "<=" = "not less than or equal to",
-    	           "~=" = "not almost equal (enough)",
-    	           "invalid `compare` argument"
-    	    ),
-    	    sQuote(y),
-    	    output_truncate(which(!(is_valid|is_na))) )
-    	} else {
-    	  message <- NULL
-    	}
     }
-
     ## construct vc list & class
     vc_output <- list(
         column_name = x,

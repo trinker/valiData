@@ -21,7 +21,7 @@ vc_logical <- function(data, x, ...){
     is_na <- is.na(col)
 
     ## expression to validate against (elementwise)
-	is_valid <- col %in% c("true", "false", "TRUE", "FALSE", "T", "F")
+	is_valid <- col %in% c("true", "false", "TRUE", "FALSE", "T", "F", '0', '1')
     is_valid[is_na] <- NA
 
 	## valid columnwise: Are all elelemnts either valid or NA?

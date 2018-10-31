@@ -20,7 +20,7 @@ vc_type <- function(data, x, type, ...){
 			   "email" = vc_email(data, x),
 			   "integer" = vc_integer(data, x),
 			   "zip" = vc_zipcode(data, x),
-			   "logical" = vc_categories(data, x, levels = c("true", "false")),
+			   "logical" = vc_categories(data, x, levels = c("true", "false", "TRUE", "FALSE", "T", "F", '0', '1')),
 			   "enumerated" = vc_no_test(data, x),
                "numeric" = vc_numeric(data, x),
 			   "string" = vc_no_test(data, x)
