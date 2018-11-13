@@ -28,6 +28,25 @@ vc_iso_datetime <- function(data, x, ...){
     zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', col[slasher_locs], perl=TRUE)
     col[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
+    ## Fix for AM/PM if system allows it (delicate, regex solution)
+    regex_12_hr <- '(^.+[ T])(\\d+)(.+)([AP]M)(\\s*)'
+    is_12_hr <- grepl(regex_12_hr, col[!is_na])
+    if (any(is_12_hr)) {
+        vals_12_hr <- as.data.frame(
+            stringi::stri_match(col[!is_na][is_12_hr], regex = regex_12_hr)[, 2:6],
+            stringsAsFactors = FALSE
+        )
+
+        names(vals_12_hr) <- c('S', 'H', 'MS', 'AMPM', 'E')
+
+        vals_12_hr['HI'] <- as.integer(vals_12_hr[['H']])
+        vals_12_hr['H'] <- ifelse(vals_12_hr[['AMPM']] == 'PM', as.character(vals_12_hr[['HI']] + 12L), vals_12_hr[['H']])
+        vals_12_hr['MS'] <- gsub('\\s+$', '', vals_12_hr[['MS']])
+
+        col[!is_na][is_12_hr] <- unlist(apply(vals_12_hr[c('S', 'H', 'MS', 'E')], 1, paste, collapse = ''))
+    }
+
+
 
     ## expression to validate against (elementwise)
     col[!is_na] <- parsedate::parse_iso_8601(trimws(col[!is_na]))
