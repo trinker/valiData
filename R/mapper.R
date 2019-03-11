@@ -65,8 +65,8 @@ mapper_columns <- function(coldct) {
 }
 
 compare_compiler <- function(x){
-    if (grepl("<|>=|<=|>|==|!=|~=",x)){
-        objects <- trimws(strsplit(x, "<|>=|<=|>|==|!=|~=")[[1]])
+    if (grepl("<|>=|<=|>|==|!=|~=|!=@|==@",x)){
+        objects <- trimws(strsplit(x, "<|>=|<=|>|==|!=|~=|!=@|==@")[[1]])
         comparison <- trimws(gsub(paste(objects,collapse ="|"),"", x))
         dateop <- ifelse(any(grepl("date",tolower(objects))),TRUE, FALSE)
         paste0('vc_compare('

@@ -43,6 +43,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     # if (x == 'EmailAddress2') browser()
         if (isTRUE(date)) {
             ## enable mm/dd/yyyy format
+
             slasher_locs <- grep('(\\d{1,2})/(\\d{1,2})/(\\d{4})', colx)
             zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', colx[slasher_locs], perl=TRUE)
             colx[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
@@ -51,8 +52,15 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
             zero_added <- gsub('(?<=^|/)(\\d)(?=/)', '0\\1', coly[slasher_locs], perl=TRUE)
             coly[slasher_locs] <- gsub('(\\d{1,2})/(\\d{1,2})/(\\d{4})', '\\3-\\1-\\2', zero_added, perl = TRUE)
 
-            colx[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
-            coly[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
+            colx2 <- as.POSIXct(rep(NA, length(colx)))
+            coly2 <- as.POSIXct(rep(NA, length(coly)))
+
+            colx2[!is.na(colx)] <- parsedate::parse_iso_8601(trimws(colx[!is.na(colx)]))
+            coly2[!is.na(coly)] <- parsedate::parse_iso_8601(trimws(coly[!is.na(coly)]))
+
+            colx <- as.Date(colx2)
+            coly <- as.Date(coly2)
+
         }
 
         if (all(!is_na & is.na(colx))|all(!is_na & is.na(coly))) {
@@ -103,6 +111,8 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
         	    switch(comparison,
         	           "==" = "not equal to",
         	           "!=" = "equal to",
+        	           "==@" = "not equal to (ignoring case)",
+        	           "!=@" = "equal to (ignoring case)",
         	           ">"  = "not greater than",
         	           "<"  = "not less than",
         	           ">=" = "not greater than or equal to",
@@ -148,6 +158,32 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 `~=` <- function(x,y){
   isTRUE(all.equal(x, y))
 }
+
+
+#' Equal Ignoring Case
+#'
+#' Helper Function for vc_compare to implement equals with case ignored
+#'
+#' @param x number one
+#' @param y number two
+#' @export
+`==@` <- function(x,y){
+  isTRUE(tolower(x) == tolower(y))
+}
+
+
+#' Not Equal Ignoring Case
+#'
+#' Helper Function for vc_compare to implement not equal with case ignored
+#'
+#' @param x number one
+#' @param y number two
+#' @export
+`!=@` <- function(x,y){
+  isTRUE(tolower(x) != tolower(y))
+}
+
+
 
 #' Main Helper Function for vc_compare
 #'

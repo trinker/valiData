@@ -53,7 +53,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
     validated <- lapply(stats::na.omit(child_file), function(x){
 
-        child_table <- read_csv_check(child_file)
+        child_table <- read_csv_check(x)
         if (!is.data.frame(child_table)) (return(NULL))
 
         if (isTRUE(ignore.case)){
@@ -107,6 +107,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 read_csv_check <- function(path, ...){
 
     data <- try(suppressWarnings(readr::read_csv(path, col_types = readr::cols(.default = "c"))))
+
     if (inherits(data, 'try-error')){
         data2 <- try(suppressWarnings(readr::read_csv(path, col_names = FALSE,
             col_types = readr::cols(.default = "c"))))

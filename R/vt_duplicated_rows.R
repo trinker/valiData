@@ -86,7 +86,7 @@ print.vt_duplicated_rows <- function(x, ...){
 			paste0(header("Duplicated Rows Test"),
 				"'%s' appears to have %s duplicated rows.\n",
 				"This is often the result of not using unique IDs/GUIDs or a data entry error.\n\n",
-				"These suggestions are likey to fix the problem:\n",
+				"These suggestions are likely to fix the problem:\n",
 					" (1) Provide unique IDs/GUIDs where neccessary; \n",
 		            " (2) Check/fix data entry errors in the rows provided below; \n",
 					" (3) Remove duplicate rows programmatically; \n",
