@@ -167,6 +167,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 #' @param x number one
 #' @param y number two
 #' @export
+#' @name equal-ignore-case
 `==@` <- function(x,y){
   isTRUE(tolower(x) == tolower(y))
 }
@@ -179,6 +180,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 #' @param x number one
 #' @param y number two
 #' @export
+#' @name not-equal
 `!=@` <- function(x,y){
   isTRUE(tolower(x) != tolower(y))
 }
