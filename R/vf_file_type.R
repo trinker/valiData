@@ -12,7 +12,7 @@
 #' vf_file_type("hello.csv")              #  TRUE
 vf_file_type <- function(file, type= "csv") {
 
-	if (tools::file_ext(file) != type) {
+	if (tolower(tools::file_ext(file)) != type) {
 		message <- sprintf(
 			paste0(
 			    header("File Type Test"),
