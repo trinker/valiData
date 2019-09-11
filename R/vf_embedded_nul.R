@@ -19,6 +19,7 @@ vf_embedded_nul <- function(path, ...){
 
     data <- suppressWarnings(readr::read_csv(path, col_names = FALSE))
 
+    problem_cases <- NULL
     problem_cases <- readr::problems(data)
 
     ## The embeded null csv check works under the assumption that readr's `problem`
