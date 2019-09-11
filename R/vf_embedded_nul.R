@@ -18,8 +18,6 @@
 vf_embedded_nul <- function(path, ...){
 
     data <- suppressWarnings(readr::read_csv(path, col_names = FALSE))
-
-    problem_cases <- NULL
     problem_cases <- readr::problems(data)
 
     ## The embeded null csv check works under the assumption that readr's `problem`
@@ -36,7 +34,7 @@ vf_embedded_nul <- function(path, ...){
     ## This depends on readr always reporting embedded nul csv files in this way.
     if (
             ## the readr problems has an 'expected' column
-            !is.null(problem_cases[["expected"]]) &&
+            nrow(problem_cases) > 0 &&
 
             ## the readr problems's expected column contains the word `embedded nul` column
             grepl("embedded null", problem_cases[["actual"]])
