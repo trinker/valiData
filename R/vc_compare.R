@@ -33,7 +33,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     ## select the column & replace missing with NA
     colx <- sub_out_missing(data[[x]])
     coly <- sub_out_missing(data[[y]])
-
+browser()
     if (!(is.null(data[[x]]) | is.null(data[[y]]))) {
 
 
@@ -155,8 +155,10 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 #' @param x number one
 #' @param y number two
 #' @export
-`~=` <- function(x,y){
-  isTRUE(all.equal(x, y))
+`~=` <- function(x, y){
+
+    unlist(Map(function(a, b) {isTRUE(all.equal(a, b))}, x, y))
+
 }
 
 
@@ -168,8 +170,10 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 #' @param y number two
 #' @export
 #' @name equal-ignore-case
-`==@` <- function(x,y){
-  isTRUE(tolower(x) == tolower(y))
+`==@` <- function(x, y){
+
+    unlist(Map(function(a, b) {isTRUE(tolower(a) == tolower(b))}, x, y))
+
 }
 
 
@@ -181,8 +185,10 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
 #' @param y number two
 #' @export
 #' @name not-equal
-`!=@` <- function(x,y){
-  isTRUE(tolower(x) != tolower(y))
+`!=@` <- function(x, y){
+
+    unlist(Map(function(a, b) {isTRUE(tolower(a) != tolower(b))}, x, y))
+
 }
 
 
