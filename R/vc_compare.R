@@ -33,7 +33,7 @@ vc_compare <- function(data, x, y, comparison, date = FALSE, ...){
     ## select the column & replace missing with NA
     colx <- sub_out_missing(data[[x]])
     coly <- sub_out_missing(data[[y]])
-browser()
+
     if (!(is.null(data[[x]]) | is.null(data[[y]]))) {
 
 
