@@ -26,11 +26,11 @@ validate_file <- function(path, file_name, map, ...){
         }
 
         embedded_nul_file <- vf_embedded_nul(path)
-        if (!embedded_nul_file[['valid']]) {
-            obj <- list(file_level = list(embedded_nul_file = embedded_nul_file), table_level =NULL, column_level = NULL)
-            class(obj) <- "validate_file"
-            return(obj)
-        }
+        # if (!embedded_nul_file[['valid']]) {
+        #     obj <- list(file_level = list(embedded_nul_file = embedded_nul_file), table_level =NULL, column_level = NULL)
+        #     class(obj) <- "validate_file"
+        #     return(obj)
+        # }
 
         ## check that csv is not broken
         broken_csv <- vf_csv_broken(path)
@@ -52,7 +52,7 @@ validate_file <- function(path, file_name, map, ...){
         }
 
         colnames(data) <- gsub("^[^ -~]|_\\d+$", "", colnames(data))  # put in to remove the <U+FEFF> character read_csv puts in first column header 8/15/2016
-# browser()
+
         ## converting broken rows from broken_csv to NA
         if (!broken_csv[["valid"]] && broken_csv[["error"]]=="comma-broken"){
             data[broken_csv[["locations"]][["rows"]]-1, ] <- NA
@@ -97,7 +97,7 @@ validate_file <- function(path, file_name, map, ...){
         if (!non_empty[["valid"]]) {
             obj <- list(
                 file_level = list(file_type = file_type, empty_file = empty_file,
-                    broken_csv = broken_csv),
+                    broken_csv = broken_csv, embedded_nul_file = embedded_nul_file),
                 table_level = list(header = header, spaced_columns = spaced_columns,
                     column_names = column_names, non_empty = non_empty
                     , na_only_rows= na_only_rows),
@@ -156,7 +156,7 @@ validate_file <- function(path, file_name, map, ...){
             columns_as_expected <- vc_column_apply(data, map[["column_level"]][[file_name]])
 
             obj <- list(
-                file_level = list(empty_file = empty_file, broken_csv = broken_csv),
+                file_level = list(empty_file = empty_file, broken_csv = broken_csv, embedded_nul_file = embedded_nul_file),
                 table_level = list(header = header, spaced_columns = spaced_columns,
                     column_names = column_names, non_empty = non_empty,
                     required_columns = required_columns, required_headers = required_headers,

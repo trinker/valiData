@@ -23,6 +23,8 @@ vt_duplicated_rows <- function(data, file_name = NULL) {
 
 	if (is.null(file_name)) file_name <- "The file"
 
+    `%>%` <- dplyr::`%>%`
+
     not_missing <- rowSums(!t(apply(data, 1, is.na))) != 0
 	dups <- duplicated(data) & not_missing  #added the part after '&' to exclude NA from dup testing 5/18/2016
 
@@ -31,13 +33,23 @@ vt_duplicated_rows <- function(data, file_name = NULL) {
 		prop <- sum(dups)/nrow(data)
 		loc <- which(dups)
 
-		data.table::as.data.table(data.table::copy(data))[, c("GRP", "N") := .(.GRP, .N), by = names(data)][
+		## If any missing headernames
+		if (any(colnames(data) == '')){
+            locs <- which(colnames(data) == '')
+            colnames(data)[colnames(data) == ''] <- paste('GenericColumnNumber', locs)
+
+		}
+
+		dup_groups <- data.table::as.data.table(data.table::copy(data))[,
+		    c("GRP", "N") := .(.GRP, .N), by = names(data)][
 		    N > 1, list(list(.I)), by = GRP][["V1"]] %>%
-		    {.[sapply(., function(x){
-		        !all(x %in% which(!not_missing))
-		        })]} %>%
-		    sapply(function(x) paste0("(", paste(1 + x, collapse=","), ")", sep="")) %>%
-		    paste(collapse=" ") -> dup_groups
+    		    {.[sapply(., function(x){
+    		        !all(x %in% which(!not_missing))
+    		        })]} %>%
+    		    sapply(function(x) paste0("(", paste(1 + x, collapse=","), ")", sep="")) %>%
+    		    paste(collapse=" ")
+
+
 
 	} else {
 

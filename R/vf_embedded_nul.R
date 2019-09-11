@@ -45,8 +45,8 @@ vf_embedded_nul <- function(path, ...){
     	            paste0(header("Embedded Null CSV Test"),
                    "The file '%s' appears to have a embedded nuls.\n",
                    "This issue can affect the reliability of later tests.\n",
-                   "This is likely because the encoding is not in UTF-8 format (though this is not guaranteed to be the issue).\n",
-                   "You can try opening '%s in Notepad++ (or other text editor) and manually changing the file encoding to UTF-8.'\n"
+                   "This is issue likely caused by an encoding that is not in UTF-8 format (though this is not guaranteed to be the issue).\n",
+                   "You can try opening '%s' in Notepad++ (or other text editor) and manually changing the file encoding to UTF-8.'\n\n\n\n"
                 ),
                 basename(path),
                 basename(path)
