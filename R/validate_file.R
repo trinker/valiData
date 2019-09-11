@@ -25,6 +25,12 @@ validate_file <- function(path, file_name, map, ...){
             return(obj)
         }
 
+        embedded_nul_file <- vf_embedded_nul(path)
+        if (!embedded_nul_file[['valid']]) {
+            obj <- list(file_level = list(embedded_nul_file = embedded_nul_file), table_level =NULL, column_level = NULL)
+            class(obj) <- "validate_file"
+            return(obj)
+        }
 
         ## check that csv is not broken
         broken_csv <- vf_csv_broken(path)
