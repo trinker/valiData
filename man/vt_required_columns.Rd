@@ -4,8 +4,13 @@
 \alias{vt_required_columns}
 \title{Validate that a CSV Has No Missing/Null Values in Required Fields}
 \usage{
-vt_required_columns(data, map, missing = c("", "NULL", "NA", "N/A", "na",
-  "n/a"), prop.acceptable = 0, file_name = NULL)
+vt_required_columns(
+  data,
+  map,
+  missing = c("", "NULL", "NA", "N/A", "na", "n/a"),
+  prop.acceptable = 0,
+  file_name = NULL
+)
 }
 \arguments{
 \item{data}{\code{\link[base]{data.frame}}.}

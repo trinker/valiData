@@ -4,8 +4,13 @@
 \alias{vc_non_response}
 \title{Checks For Non-Response Elements In Vector}
 \usage{
-vc_non_response(x, prop.acceptable = 0, missing = c("", "NULL", "NA",
-  "N/A", "na", "n/a"), required = FALSE, file_name = NULL)
+vc_non_response(
+  x,
+  prop.acceptable = 0,
+  missing = c("", "NULL", "NA", "N/A", "na", "n/a"),
+  required = FALSE,
+  file_name = NULL
+)
 }
 \arguments{
 \item{x}{char vector}

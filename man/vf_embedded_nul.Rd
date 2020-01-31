@@ -19,7 +19,7 @@ multi-byte character sequences).
 \examples{
 loc <- file.path(tempdir(), 'temp.csv')
 cat(
-    paste(c(",x,y", "1, the dog, wen,1", "2,door,2"), collapse="\\n"),
+    paste(c(",x,y", "1, the dog, wen,1", "2,door,2"), collapse="\n"),
     file=loc
 )
 vf_embedded_nul(loc)

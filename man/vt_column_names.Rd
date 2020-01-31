@@ -4,8 +4,13 @@
 \alias{vt_column_names}
 \title{Validate that a CSV's Columns Are Named Correctly}
 \usage{
-vt_column_names(data, map, ignore.case = FALSE, ignore.space = FALSE,
-  file_name = NULL)
+vt_column_names(
+  data,
+  map,
+  ignore.case = FALSE,
+  ignore.space = FALSE,
+  file_name = NULL
+)
 }
 \arguments{
 \item{data}{\code{\link[base]{data.frame}}.}

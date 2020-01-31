@@ -17,10 +17,10 @@ Validates and Reports If Non-ASCII characters present
 \examples{
 dat <- data.frame(
     txt = c(
-        "fa\\xE7ile test of showNonASCII():",
+        "fa\xE7ile test of showNonASCII():",
         "\\\\details{",
         "   This is a good line",
-        "   This has an \\xfcmlaut in it.",
+        "   This has an \xfcmlaut in it.",
         "   OK again.",
         "}"
     ),

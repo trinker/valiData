@@ -4,7 +4,7 @@
 \alias{~=}
 \title{Nearly Equal}
 \usage{
-"~="(x, y)
+`~=`(x, y)
 }
 \arguments{
 \item{x}{number one}

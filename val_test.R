@@ -7,7 +7,7 @@ clDev::source_R_folder()
 
 
 
-inst <- 'bhc'
+inst <- 'Campus'
 file <- dir(sprintf("C:/Users/trinker/OneDrive - Campus Labs LLC/Desktop/Data_Validation/TestCore/%s/Accounts/AccountImports", inst), pattern = '/.csv$', full.names = TRUE)
 file ## Make sur there's just one
 loc <- sprintf("C:/Users/trinker/OneDrive - Campus Labs LLC/Desktop/Data_Validation/TestCore/%s", inst)

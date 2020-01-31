@@ -4,8 +4,7 @@
 \alias{print.valiData_dir_level}
 \title{Prints a valiData_dir_level Object}
 \usage{
-\method{print}{valiData_dir_level}(x, as.report = FALSE, delete = TRUE,
-  ...)
+\method{print}{valiData_dir_level}(x, as.report = FALSE, delete = TRUE, ...)
 }
 \arguments{
 \item{x}{A valiData_dir_level object.}

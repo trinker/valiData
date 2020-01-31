@@ -38,13 +38,12 @@ compare_column <- function(path, parent.column, child.column = parent.column,
     if (!is.data.frame(parent_table)) (return(NULL))
 
 
-
     if (isTRUE(ignore.case)){
-        colnames(parent_table) <- tolower(colnames(parent_table))
+        colnames(parent_table) <- stringi::stri_trans_tolower(colnames(parent_table))
     }
 
     if (isTRUE(ignore.element.case)){
-        parent_table[sapply(parent_table, is.character)] <- lapply(parent_table[sapply(parent_table, is.character)], tolower)
+        parent_table[sapply(parent_table, is.character)] <- lapply(parent_table[sapply(parent_table, is.character)], stringi::stri_trans_tolower)
     }
 
     ## check for duplicate rows minus the personal identifier
@@ -58,8 +57,8 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
         if (isTRUE(ignore.case)){
             colnames(child_table) <- tolower(colnames(child_table))
-            child.column <- tolower(child.column)
-            parent.column <- tolower(parent.column)
+            child.column <- stringi::stri_trans_tolower(child.column)
+            parent.column <- stringi::stri_trans_tolower(parent.column)
         }
 
         parent_table <- parent_table[,colnames(parent_table) %in% parent.column, drop = FALSE]
@@ -69,7 +68,7 @@ compare_column <- function(path, parent.column, child.column = parent.column,
 
 
         if (isTRUE(ignore.element.case)){
-            child_table[sapply(child_table, is.character)] <- lapply(child_table[sapply(child_table, is.character)], tolower)
+            child_table[sapply(child_table, is.character)] <- lapply(child_table[sapply(child_table, is.character)], stringi::stri_trans_tolower)
         }
 
         vc_id_found(data=child_table, x=parent.column, y=child.column,
@@ -124,8 +123,8 @@ read_csv_check <- function(path, ...){
 
 vc_id_found <- function(data, x, data2, y = x, ignore.case, parent = 'the parent data', child = '', ...) {
 
-    xc <- ifelse(ignore.case, tolower(x), x)
-    yc <- ifelse(ignore.case, tolower(y), y)
+    xc <- ifelse(ignore.case, stringi::stri_trans_tolower(x), x)
+    yc <- ifelse(ignore.case, stringi::stri_trans_tolower(y), y)
 
     col <- sub_out_missing(data[[yc]])
     is_na <- is.na(col)

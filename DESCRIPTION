@@ -25,5 +25,4 @@ Imports:
     googlesheets
 License: MIT + file LICENSE
 LazyData: TRUE
-Roxygen: list(wrap = FALSE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

@@ -5,7 +5,7 @@
 \alias{==@}
 \title{Equal Ignoring Case}
 \usage{
-"==@"(x, y)
+`==@`(x, y)
 }
 \arguments{
 \item{x}{number one}

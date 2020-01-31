@@ -27,7 +27,7 @@ Generic column validation
 \examples{
 vc_(mtcars, 'mpg', 'abs(scale(mpg)) < 2')
 vc_(mtcars, 'mpg', 'abs(scale(mpg)) < 2',
-    augment_comment = "...\\n    because they may be (outliers > 2 sd)")
+    augment_comment = "...\n    because they may be (outliers > 2 sd)")
 vc_(CO2, 'Type', '!grepl("^M", Type)',
     augment_comment = " because they don't begin with `M`")
 vc_(mtcars, 'drat', 'drat >= wt',

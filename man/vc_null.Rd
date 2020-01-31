@@ -4,8 +4,14 @@
 \alias{vc_null}
 \title{Checks For Null Elements In Vector}
 \usage{
-vc_null(data, x, prop.acceptable = 0, missing = c("", "NULL"),
-  required = FALSE, ...)
+vc_null(
+  data,
+  x,
+  prop.acceptable = 0,
+  missing = c("", "NULL"),
+  required = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A data frame.}

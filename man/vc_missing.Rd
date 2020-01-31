@@ -4,8 +4,14 @@
 \alias{vc_missing}
 \title{Checks For Missing Elements In Vector}
 \usage{
-vc_missing(data, x, prop.acceptable = 0, missing = c("", "NULL", "NA",
-  "N/A", "na", "n/a"), required = FALSE, ...)
+vc_missing(
+  data,
+  x,
+  prop.acceptable = 0,
+  missing = c("", "NULL", "NA", "N/A", "na", "n/a"),
+  required = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A data frame.}
