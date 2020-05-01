@@ -1,6 +1,6 @@
 Package: valiData
 Title: Data Validation
-Version: 0.1.8
+Version: 0.2.0
 Authors@R: c(person("Steve", "Simpson", email =
         "steven.troy.simpson@gmail.com", role = c("aut")),
         person("Tyler", "Rinker", email = "tyler.rinker@gmail.com",
@@ -18,6 +18,7 @@ Imports:
     readxl,
     stats,
     stringi,
+    tibble,
     tools,
     magrittr,
     data.table,
@@ -25,4 +26,4 @@ Imports:
     googlesheets
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
