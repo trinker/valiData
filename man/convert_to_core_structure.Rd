@@ -36,7 +36,7 @@ and files.
 }
 \examples{
 \dontrun{
-temp_loc <- as_core_structure(
+temp_loc <- convert_to_core_structure(
     path = 'data/tyler_fake',
     institution = 'HomeTown',
     first.import = TRUE
